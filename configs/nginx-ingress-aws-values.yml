@@ -5,12 +5,16 @@ rbac:
 
 controller:
   config:
-    ssl-redirect: "true" # Redirect Insecure traffic to Https
+    # Redirect Insecure traffic to Https
+    # ssl-redirect: "true"
+    # https://github.com/kubernetes/ingress-nginx/issues/1957#issuecomment-462826897
+    use-forwarded-headers: 'true'
   service:
     targetPorts:
       http: http
       https: http # SSL termination at the load balancer
     annotations:
       service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
       service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "<ACM Certificate ARN for SSL>"
 
