@@ -17,8 +17,8 @@
 # that are available to be allocated from.
 # To allocate a GameServer from a Fleet, use a GameServerAllocation
 #
-{{- if and .Values.agones.enabled .Values.gsg.enabled -}}
-apiVersion: "agones.dev/v1"
+{{- if .Values.gsg.enabled -}}
+apiVersion: agones.dev/v1
 kind: Fleet
 # Fleet Metadata
 # https://v1-14.docs.kubernetes.io/docs/reference/generated/kubernetes-api/v1.14/#objectmeta-v1-meta

@@ -17,7 +17,7 @@
 # that are available to be allocated from.
 # To allocate a GameServer from a Fleet, use a GameServerAllocation
 #
-{{- if and .Values.agones.enabled .Values.gs.enabled -}}
+{{- if .Values.gs.enabled }}
 apiVersion: "agones.dev/v1"
 kind: Fleet
 # Fleet Metadata
@@ -33,21 +33,21 @@ spec:
   # resources
   # "Distributed" is aimed at static Kubernetes clusters, wherein we want to distribute resources across the entire
   # cluster
-  scheduling: Packed
+  # scheduling: Packed
   # a GameServer template - see:
   # https://agones.dev/site/docs/reference/gameserver/ for all the options
-  strategy:
+  # strategy:
     # The replacement strategy for when the GameServer template is changed. Default option is "RollingUpdate",
     # "RollingUpdate" will increment by maxSurge value on each iteration, while decrementing by maxUnavailable on each
     # iteration, until all GameServers have been switched from one version to another.
     # "Recreate" terminates all non-allocated GameServers, and starts up a new set with the new details to replace them.
-    type: RollingUpdate
+    # type: RollingUpdate
     # Only relevant when `type: RollingUpdate`
-    rollingUpdate:
+    # rollingUpdate:
       # the amount to increment the new GameServers by. Defaults to 25%
-      maxSurge: 25%
+      # maxSurge: 25%
       # the amount to decrements GameServers by. Defaults to 25%
-      maxUnavailable: 25%
+      # maxUnavailable: 25%
   template:
     # GameServer metadata
     metadata:
@@ -63,12 +63,12 @@ spec:
         initialDelaySeconds: 30
         periodSeconds: 60
       # Parameters for game server sidecar
-      sdkServer:
+      # sdkServer:
         # sdkServer log level parameter has three options:
         #  - "Info" (default) The SDK server will output all messages except for debug messages
         #  - "Debug" The SDK server will output all messages including debug messages
         #  - "Error" The SDK server will only output error messages
-        logLevel: Info
+        # logLevel: Info
       # The GameServer's Pod template
       template:
         spec:
@@ -76,4 +76,4 @@ spec:
           - name: {{ include "xrchat.gs.fullname" . }}
             image: "{{ .Values.gs.image.repository }}:{{ .Values.gs.image.tag }}"
             imagePullPolicy: {{ .Values.gs.image.pullPolicy }}
-{{- end -}}
+{{- end }}
