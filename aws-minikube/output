@@ -1,0 +1,7 @@
+Outputs:
+
+copy_config_dns = To copy the kubectl config file using DNS record, run: 'scp centos@dev.agones.minikube.xrchat.dev:/home/centos/kubeconfig .kubeconfig'
+copy_config_ip = To copy the kubectl config file using IP address, run: 'scp centos@18.204.29.23:/home/centos/kubeconfig_ip .kubeconfig'
+minikube_dns = dev.agones.minikube.xrchat.dev
+minikube_ip = 18.204.29.23
+
